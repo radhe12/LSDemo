@@ -12,14 +12,24 @@ namespace LifeSpeakDemo
 	{
         VideoPlayer vp;
         Label title;
-        
+        StackLayout header_layout;
         Image back;
         public VideoPlay(Entry entrydata)
         {
             back = new Image { Margin = 5, Source = "back.png", VerticalOptions = LayoutOptions.Start, HeightRequest = 50, WidthRequest = 50 };
-            var backtap = new TapGestureRecognizer();
+
+           var backtap = new TapGestureRecognizer();
             backtap.Tapped += Backtap_Tapped;
             back.GestureRecognizers.Add(backtap);
+            header_layout = new StackLayout
+            {
+                HeightRequest = 50,
+                Orientation = StackOrientation.Horizontal,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                Children = {
+                    back,new Label{ Text="Video Playing",FontSize=18,VerticalOptions=LayoutOptions.Center,HorizontalOptions=LayoutOptions.CenterAndExpand}
+                }
+            };
             vp = new VideoPlayer
             {
                 WidthRequest = 320,
@@ -35,7 +45,7 @@ namespace LifeSpeakDemo
             Content = new StackLayout
             {
                 Children = {
-                    back,vp,title
+                    header_layout,vp,title
                 }
             };
 
